@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Online Blogger Application</title>
+<link rel="stylesheet" href="library.css"></link>
+<script type="text/javascript"
+	src="jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="blogger.js"></script>
+</head>
+<body>
+	<h1>Online Public Library</h1>
+	<a href="#" id="addLink">login</a> |
+	<a href="#" id="findLink">blog</a>
+	<hr />
+	<div id="addForm">
+		<table>
+			<tr>
+				<td>User ID</td>
+				<td><input id="userID"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input id="password"></td>
+			</tr>
+			<tr>
+				<td>Email ID</td>
+				<td><input id="emailID"></td>
+			</tr>
+			<tr>
+				<td><button id="addButton">Add</button></td>
+			</tr>
+		</table>
+	</div>
+	<div id="findForm">
+		Find Book by ISBN <input id="key">
+		<button id="findButton">Find</button>
+	</div>
+	<div id="findResults">
+		Title: <span id="bookTitle"></span>
+	</div>
+</body>
+</html>
