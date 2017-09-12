@@ -20,10 +20,10 @@ phases:
       - echo Working on creating the tar ball with the WAR and AppSpec file for CodeDeploy
       - mkdir appfiles
       - cd appfiles
-      - cp ../blogger/target/blogger.war .
+      - cp /target/blogger.war .
       - cp ../appspec.yml .
       - ls -al
-      - tar -zcvf ../blogger/target/blogger.tar.gz *.*
+      - tar -zcvf /target/blogger.tar.gz *.*
 artifacts:
   files:
 # IMPORTANT
