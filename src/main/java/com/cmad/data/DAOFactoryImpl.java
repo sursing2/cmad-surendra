@@ -9,7 +9,7 @@ import com.cmad.biz.DAOFactory;
 
 
 public class DAOFactoryImpl extends DAOFactory{
-	static MongoClient mongoClient = new MongoClient("127.0.0.1:27017");
+	static MongoClient mongoClient = new MongoClient("172.31.23.14:27017");
 	static Morphia morphia= new Morphia();
 	static Datastore  datatstore = morphia.createDatastore(mongoClient, "mydb");
 	
