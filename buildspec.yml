@@ -28,7 +28,7 @@ artifacts:
   files:
 # IMPORTANT
 # You have to use the tar.gz if you are manually executing CodeDeploy
-#    - blog/target/blog.tar.gz
+    # - target/blogger.tar.gz
 # Use the individual files if you are using the CodeDeploy from CodePipeline
 # Reason is pipeline does not untar and errors out saying that the appspec file is not there
     - appfiles/appspec.yml
