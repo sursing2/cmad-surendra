@@ -24,6 +24,8 @@ phases:
       - cp ../appspec.yml .
       - ls -al
       - tar -zcvf ../target/blogger.tar.gz *.*
+      - ls -al
+      - ls -al ../target/
 artifacts:
   files:
 # IMPORTANT
