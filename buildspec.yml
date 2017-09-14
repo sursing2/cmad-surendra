@@ -23,7 +23,7 @@ phases:
       - cp ../target/blogger.war .
       - cp ../appspec.yml .
       - ls -al
-      - tar -zcvf ../target/blogger.tar.gz *.*
+      - tar -zcvf blogger.tar.gz *.*
       - ls -al
       - ls -al ../target/
 artifacts:
