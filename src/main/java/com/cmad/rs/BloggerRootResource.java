@@ -147,6 +147,7 @@ public class BloggerRootResource {
 	@Path("/blog/")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@UserAuthontiationNeeded
 	public Response createBlog(Blog blog) {
 		System.out.println("BloggerRootResource.createBlog()");	
 		try {
@@ -212,6 +213,7 @@ public class BloggerRootResource {
 	@Path("/blog/")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@UserAuthontiationNeeded
 	public Response updateBlog(Blog blog) {
 		System.out.println("BloggerRootResource.updateBlog()");
 		try {
@@ -229,6 +231,7 @@ public class BloggerRootResource {
 	@DELETE
 	@Path("/blog/{blogID}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@UserAuthontiationNeeded
 	public Response delteBlog(@PathParam("blogID") String blogID) {
 		System.out.println("BloggerRootResource.delteBlog()");
 		try {
