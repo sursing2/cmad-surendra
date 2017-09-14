@@ -82,7 +82,6 @@ public class BloggerRootResource {
 	@Path("/users/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@UserAuthontiationNeeded
 	public Response createUser(User user) {
 		System.out.println("BloggerRootResource.createUser():"+ user.getUserID());
 		try {
