@@ -67,6 +67,7 @@ public class BloggerRootResource {
 	@DELETE
 	@Path("/users/{userID}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@UserAuthontiationNeeded
 	public Response delteUser(@PathParam("userID") String userID) {
 		try {
 			userController.deleteUser(userID);
@@ -100,6 +101,7 @@ public class BloggerRootResource {
 	@Path("/users/")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@UserAuthontiationNeeded
 	public Response updateUser(User user) {
 		System.out.println("BloggerRootResource.updateUser()");
 		try {
@@ -116,7 +118,6 @@ public class BloggerRootResource {
 
 	@GET
 	@Path("/users/")
-	@UserAuthontiationNeeded
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	
