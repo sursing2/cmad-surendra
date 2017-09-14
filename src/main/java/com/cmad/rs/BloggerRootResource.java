@@ -183,10 +183,12 @@ public class BloggerRootResource {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response readBlogByUserID(@PathParam("userID") String userID) {
-		System.out.println("BloggerRootResource.ReadBlog()");
+		System.out.println("BloggerRootResource.readBlogByUserID()");
 		try {
 			List<Blog> blog = blogController.readByUserID(userID);
-			return Response.ok().entity(blog).build();
+			GenericEntity<List<Blog>> list = new GenericEntity<List<Blog>>(blog){};
+			System.out.println("BloggerRootResource.readBlogByUserID():blog:"+list);
+			return Response.ok().entity(list).build();
 		} catch (BlogNotFoundException une) {
 			return Response.status(404).build();
 		} catch (BloggerException be) {
@@ -202,7 +204,8 @@ public class BloggerRootResource {
 		System.out.println("BloggerRootResource.readBlogByCategory()"+category);
 		try {
 			List<Blog> blogs = blogController.readByCategory(category);
-			return Response.ok().entity(blogs).build();
+			GenericEntity<List<Blog>> list = new GenericEntity<List<Blog>>(blogs){};
+			return Response.ok().entity(list).build();
 		} catch (BlogNotFoundException une) {
 			return Response.status(404).build();
 		} catch (BloggerException be) {
