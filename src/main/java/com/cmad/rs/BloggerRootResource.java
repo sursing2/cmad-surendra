@@ -28,6 +28,7 @@ import com.cmad.api.Blog;
 import com.cmad.api.BlogController;
 import com.cmad.api.BlogNotFoundException;
 import com.cmad.api.BloggerException;
+import com.cmad.api.DuplicateBlogException;
 import com.cmad.api.DuplicateUserException;
 import com.cmad.api.InvalidBlogException;
 import com.cmad.api.InvalidUserException;
@@ -52,7 +53,7 @@ public class BloggerRootResource {
 
 	@GET
 	@Path("/users/{userID}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON/*, MediaType.APPLICATION_XML */})
 	public Response readUser(@PathParam("userID") String userID) {
 		try {
 			User user = userController.readUser(userID);
@@ -70,6 +71,8 @@ public class BloggerRootResource {
 	@UserAuthontiationNeeded
 	public Response delteUser(@PathParam("userID") String userID) {
 		try {
+			
+			blogController.deleteAllByUserID(userID);
 			userController.deleteUser(userID);
 			return Response.ok().build();
 		} catch (UserNotFoundException une) {
@@ -82,7 +85,7 @@ public class BloggerRootResource {
 	@POST
 	@Path("/users/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON/*, MediaType.APPLICATION_XML */})
 	public Response createUser(User user) {
 		System.out.println("BloggerRootResource.createUser():"+ user.getUserID());
 		try {
@@ -99,8 +102,8 @@ public class BloggerRootResource {
 
 	@PUT
 	@Path("/users/")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
 	@UserAuthontiationNeeded
 	public Response updateUser(User user) {
 		System.out.println("BloggerRootResource.updateUser()");
@@ -155,7 +158,7 @@ public class BloggerRootResource {
 			return Response.ok().entity(blog).header("location", "/public/blog/" + blog.getBlogID()).build();
 		} catch (InvalidUserException iue) {
 			return Response.status(405).build();
-		} catch (DuplicateUserException due) {
+		} catch (DuplicateBlogException due) {
 			return Response.status(406).build();
 		} catch (BloggerException be) {
 			return Response.status(500).build();
@@ -191,19 +194,39 @@ public class BloggerRootResource {
 			return Response.ok().entity(list).build();
 		} catch (BlogNotFoundException une) {
 			return Response.status(404).build();
-		} catch (BloggerException be) {
+		} catch (UserNotFoundException une) {
+			return Response.status(405).build();
+		}catch (BloggerException be) {
 			return Response.status(500).build();
 		}
 	}
 
 	@GET
-	@Path("/blog/")
+	@Path("/blog/category/{category}/")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response readBlogByCategory(@QueryParam("category") String category) {
+	public Response readBlogByCategory(@PathParam("category") String category) {
 		System.out.println("BloggerRootResource.readBlogByCategory()"+category);
+		System.out.println("BloggerRootResource.readBlogByCategory()11111111");
 		try {
 			List<Blog> blogs = blogController.readByCategory(category);
+			GenericEntity<List<Blog>> list = new GenericEntity<List<Blog>>(blogs){};
+			return Response.ok().entity(list).build();
+		} catch (BlogNotFoundException une) {
+			return Response.status(404).build();
+		} catch (BloggerException be) {
+			return Response.status(500).build();
+		}
+	}
+	@GET
+	@Path("/blog/title/{title}/")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response readBlogByTitle(@PathParam("title") String title) {
+		System.out.println("BloggerRootResource.readBlogByTitle()"+title);
+		try {
+			List<Blog> blogs = blogController.readByTitle(title);
+			System.out.println("BloggerRootResource.readBlogByTitle():"+blogs);
 			GenericEntity<List<Blog>> list = new GenericEntity<List<Blog>>(blogs){};
 			return Response.ok().entity(list).build();
 		} catch (BlogNotFoundException une) {

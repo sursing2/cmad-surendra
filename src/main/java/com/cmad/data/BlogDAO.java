@@ -14,6 +14,8 @@ public interface BlogDAO {
 	public List<Blog> readByUserID(String userID);
 	
 	public List<Blog> readByCategory(String category);
+	
+	public List<Blog> readByTitle(String title);
 
 	public void deleteBlog(String blogID);
 }

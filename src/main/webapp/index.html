@@ -2,18 +2,123 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Online Blogger Application</title>
+<title>CMAD Blogger Application</title>
 <link rel="stylesheet" href="library.css"></link>
 <script type="text/javascript"
 	src="jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="blogger.js"></script>
+<script type="text/javascript" src="library2.js"></script>
+
+<style>
+.container {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+}
+
+.container a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.container a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+</style>
+
 </head>
 <body>
-	<h1>Online Public Library</h1>
-	<a href="#" id="addLink">login</a> |
-	<a href="#" id="findLink">blog</a>
-	<hr />
-	<div id="addForm">
+	<center> <h1 style="background-color:#a55335">Welcome To CMAD Blogger Application </h1></center>
+
+	<div class="container">
+		<a href="#" id="logInUserLink">Log In</a>
+		<div class="dropdown">
+			<button class="dropbtn" onclick="myFunction()">User Management</button>
+			<div class="dropdown-content" id="myUserManagement">
+				<a href="#" id="registerUserLink">Register User</a>
+				<a href="#" id="updateUserProfileLink">Update User Profile</a>
+				<a href="#" id="deleteUserProfileLink">Delete User Profile</a>
+			</div>
+		</div>
+
+		<div class="dropdown">
+			<button class="dropbtn" onclick="myBlogFunction()">Blog Management</button>
+			<div class="dropdown-content" id="myBlogManagement">
+				<a href="#" id="createBlogLink">Create Blog</a>
+				<a href="#" id="searchBlogByTitleLink">Search Blogs By Title</a>
+				<a href="#" id="searchBlogByCategoryLink">Search Blogs By Category</a>
+				<a href="#" id="searchBlogByUserLink">Search Blogs By User</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		/* When the user clicks on the button,
+		toggle between hiding and showing the dropdown content */
+		function myFunction() {
+			document.getElementById("myUserManagement").classList.toggle("show");
+		}
+
+		function myBlogFunction() {
+			document.getElementById("myBlogManagement").classList.toggle("show");
+		}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(e) {
+	  if (!e.target.matches('.dropbtn')) {
+		var myUserManagement = document.getElementById("myUserManagement");
+		  if (myUserManagement.classList.contains('show')) {
+			myUserManagement.classList.remove('show');
+		  }
+	  }
+	}
+	</script>
+
+	<div id="registerUserForm">
 		<table>
 			<tr>
 				<td>User ID</td>
@@ -24,20 +129,140 @@
 				<td><input id="password"></td>
 			</tr>
 			<tr>
+				<td>First Name</td>
+				<td><input id="firstName"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input id="lastName"></td>
+			</tr>
+			<tr>
 				<td>Email ID</td>
 				<td><input id="emailID"></td>
 			</tr>
 			<tr>
-				<td><button id="addButton">Add</button></td>
+				<td><button id="registerUserButton">Register</button></td>
 			</tr>
 		</table>
 	</div>
-	<div id="findForm">
-		Find Book by ISBN <input id="key">
-		<button id="findButton">Find</button>
+	<div id="registerUserResults">
+		<span id="registerMsg"></span>
 	</div>
-	<div id="findResults">
-		Title: <span id="bookTitle"></span>
+	
+	<div id="updateUserProfileForm">
+		<table>
+			<tr>
+				<td>Password</td>
+				<td><input id="updatedPassword"></td>
+			</tr>
+			<tr>
+				<td>First Name</td>
+				<td><input id="updatedFirstName"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input id="updatedLastName"></td>
+			</tr>
+			<tr>
+				<td>Email ID</td>
+				<td><input id="updatedEmailID"></td>
+			</tr>
+			<tr>
+				<td><button id="updateUserProfileButton">Update</button></td>
+			</tr>
+		</table>
+	</div>
+	<div id="updateUserProfileResults">
+		<span id="updateUserProfileMsg"></span>
+	</div>
+	
+	<div id="deleteUserProfileForm">
+		<table>
+			<tr>
+				<td><button id="deleteUserProfileButton">Delete</button></td>
+			</tr>
+		</table>
+	</div>
+	<div id="deleteUserProfileResults">
+		<span id="deleteUserProfileMsg"></span>
+	</div>
+
+	<div id="logInForm">
+		<table>
+			<tr>
+				<td>User ID</td>
+				<td><input id="logInUserID"></td>
+			</tr>
+
+			<tr>
+				<td>Password</td>
+				<td><input id="LogInPassword"></td>
+			</tr>
+
+			<tr>
+				<td><button id="logINButton">Log In</button></td>
+			</tr>
+		</table>
+	</div>
+	<div id="LogInResults">
+		<span id="LogINMsg"></span>
+	</div>
+	
+	<div id="createBlogForm">
+		<table>
+			<tr>
+				<td>Title</td>
+				<td><input id="blogTitle"></td>
+			</tr>
+
+			<tr>
+				<td>Text</td>
+				<td><input id="blogText"></td>
+			</tr>
+
+			<tr>
+				<td>Category</td>
+				<td><input id="blogCategory"></td>
+			</tr>
+
+			<tr>
+				<td>User ID</td>
+				<td><input id="BlogUserId"></td>
+			</tr>
+			<tr>
+				<td><button id="createBlogButton">Post Blog</button></td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="createBlogFormResults">
+		<span id="createBlogResults"></span>
+	</div>
+
+	<div id="searchBlogByUserIDForm">
+		Search Blog by User ID <input id="searchUserID">
+		<button id="searchBlogByUserIDButton">Search</button>
+	</div>
+	
+	<div id="searchBlogByUserIDResult">
+		<span id="blogsListByUserID"></span>
+	</div>
+	
+	<div id="searchBlogByCategoryForm">
+		Search Blog by Category <input id="searchCategory">
+		<button id="searchBlogByCategoryButton">Search</button>
+	</div>
+	
+	<div id="searchBlogByCategoryResult">
+		<span id="blogsListByCategory"></span>
+	</div>
+	
+	<div id="searchBlogByTitleForm">
+		Search Blog by Title <input id="searchTitle">
+		<button id="searchBlogByTitleButton">Search</button>
+	</div>
+	<div id="searchBlogByTitleResult">
+		<span id="blogsListByTitle"></span>
 	</div>
 </body>
 </html>

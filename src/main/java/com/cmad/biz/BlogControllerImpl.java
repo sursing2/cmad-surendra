@@ -28,17 +28,21 @@ public class BlogControllerImpl implements BlogController {
 
 	public List<Blog> readByUserID(String userID) throws InvalidBlogException, UserNotFoundException, BlogNotFoundException{
 		
+		System.out.println("BlogControllerImpl.readByUserID():0"+userID);
 		if (userID == null) {
 			throw new InvalidBlogException();
 		}
 		if(DAOFactory.getInstance().getUserDAO().readUser(userID) == null) {
 			throw new UserNotFoundException();
 		}
+		System.out.println("BlogControllerImpl.readByUserID()::!");
 		List<Blog> blogs = DAOFactory.getInstance().getBlogDAO().readByUserID(userID);
 		
+		System.out.println("BlogControllerImpl.readByUserID()2");
 		if(blogs == null) {
 			throw new BlogNotFoundException();
 		}
+		System.out.println("BlogControllerImpl.readByUserID()::blogs"+blogs);
 		return blogs;
 	}
 	
@@ -89,5 +93,34 @@ public class BlogControllerImpl implements BlogController {
 			throw new BlogNotFoundException();
 		}
 		DAOFactory.getInstance().getBlogDAO().deleteBlog(blogID);
+	}
+
+	@Override
+	public List<Blog> readByTitle(String title) throws InvalidBlogException, BlogNotFoundException {
+		if (title == null) {
+			throw new InvalidBlogException();
+		}
+		System.out.println("BlogControllerImpl.readByTitle():"+title);
+		List<Blog> blogs = DAOFactory.getInstance().getBlogDAO().readByTitle(title);
+		
+		if(blogs == null) {
+			throw new BlogNotFoundException();
+		}
+		return blogs;
+	}
+
+	@Override
+	public void deleteAllByUserID(String userID)
+			throws UserNotFoundException, InvalidBlogException, BlogNotFoundException {
+		System.out.println("BlogControllerImpl.deleteAllByUserID()");
+		
+		List<Blog> blogs =  DAOFactory.getInstance().getBlogDAO().readByUserID(userID);
+		System.out.println("BlogControllerImpl.deleteAllByUserID():size:"+blogs.size());
+		for(int index = 0 ; index < blogs.size(); index++) {
+			Blog blog = blogs.get(index);
+			System.out.println("BlogControllerImpl.deleteAllByUserID():blogID:"+blog.getBlogID());
+			DAOFactory.getInstance().getBlogDAO().deleteBlog(blog.getBlogID());
+		}
+		
 	}
 }

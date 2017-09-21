@@ -37,12 +37,25 @@ public class MongoBlogDAO extends BasicDAO<Blog, String> implements BlogDAO{
 	}
 
 	public List<Blog> readByUserID(String userID) {
+		System.out.println("MongoBlogDAO.readByUserID():"+userID);
+		
 		Query<Blog> query = createQuery().field("userID").equal(userID);
-		System.out.println("MongoUsersDAO.readAllUser()"+query.asList());
+		
+		System.out.println("MongoUsersDAO.readByUserID()"+query.asList());
 		return query.asList();
 	}
 	public List<Blog> readByCategory(String category) {
 		Query<Blog> query = createQuery().field("blogCategory").equal(category);
+		return query.asList();
+	}
+
+	@Override
+	public List<Blog> readByTitle(String title) {
+		System.out.println("MongoBlogDAO.readByTitle()"+title);
+		
+		Query<Blog> query = createQuery().field("blogTitle").containsIgnoreCase(title);
+		
+		System.out.println("MongoBlogDAO.readByTitle():"+query.asList());
 		return query.asList();
 	}
 }

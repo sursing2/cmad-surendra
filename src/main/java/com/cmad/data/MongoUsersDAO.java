@@ -22,7 +22,8 @@ public class MongoUsersDAO extends BasicDAO<User, String> implements UsersDAO{
 
 	public User readUser(String userID) {
 		Query<User> query = createQuery().field("userID").equal(userID);
-		System.out.println("MongoUsersDAO.readUser():"+query);
+		System.out.println("MongoUsersDAO.readUser():"+query.get());
+		
 		return (User)query.get();
 	}
 
