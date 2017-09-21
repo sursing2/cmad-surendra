@@ -214,6 +214,8 @@ window.addEventListener("load", function() {
 			};
 			xhr.send();
 		}
+		document.getElementById("searchUserID").value = "";
+		//document.getElementById("blogsListByUserID").innerHTML = "";
 	});
 	document.getElementById("searchBlogByCategoryButton").addEventListener("click", function() {
 		var category = document.getElementById("searchCategory").value;
@@ -253,6 +255,7 @@ window.addEventListener("load", function() {
 			};
 			xhr.send();
 		}
+		document.getElementById("searchCategory").value = "";
 	});
 	document.getElementById("searchBlogByTitleButton").addEventListener("click", function() {
 		var title = document.getElementById("searchTitle").value;
@@ -292,6 +295,7 @@ window.addEventListener("load", function() {
 			};
 			xhr.send();
 		}
+		document.getElementById("searchTitle").value = "";
 	});
 	document.getElementById("registerUserButton").addEventListener("click", function() {
 		var userID = document.getElementById("userID").value;
@@ -339,6 +343,11 @@ window.addEventListener("load", function() {
 			};
 			xhr.send(JSON.stringify(user));
 		}
+		document.getElementById("userID").value = "";
+		document.getElementById("password").value = "";
+		document.getElementById("firstName").value = "";
+		document.getElementById("lastName").value = "";
+		document.getElementById("emailID").value = "";
 	});
 
 	document.getElementById("updateUserProfileButton").addEventListener("click", function() {
@@ -385,6 +394,10 @@ window.addEventListener("load", function() {
 	            xhr.send(JSON.stringify(user));
 	        }
 		}
+		document.getElementById("updatedPassword").value = "";
+		document.getElementById("updatedFirstName").value = "";
+		document.getElementById("updatedLastName").value = "";
+		document.getElementById("updatedEmailID").value = "";
 	});
 	document.getElementById("deleteUserProfileButton").addEventListener("click", function() {
 
@@ -458,6 +471,9 @@ window.addEventListener("load", function() {
 				document.getElementById("createBlogResults").innerHTML = "Log In First";
 			}
 		}
+		document.getElementById("blogTitle").value = "";
+		document.getElementById("blogText").value = "";
+		document.getElementById("blogCategory").value = "";
 	});
 	document.getElementById("logINButton").addEventListener("click", function() {
 		var logInUserID = document.getElementById("logInUserID").value;
@@ -494,6 +510,8 @@ window.addEventListener("load", function() {
 				document.getElementById("LogINMsg").innerHTML = "Wrong User ID or Password ! Retry";
 			}
 		}
+		document.getElementById("logInUserID").value = "";
+		document.getElementById("LogInPassword").value = "";
 	});
 });
 
