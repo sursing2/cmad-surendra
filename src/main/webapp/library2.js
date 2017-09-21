@@ -178,93 +178,113 @@ window.addEventListener("load", function() {
 
 	document.getElementById("searchBlogByUserIDButton").addEventListener("click", function() {
 		var userID = document.getElementById("searchUserID").value;
-		var url = "public/blogger/blog/users/" + userID;
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", url, true);
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var blogs = JSON.parse(xhr.responseText);
-				var htmlText = '';
-
-				for (var prop in blogs) {
-					htmlText += '<b>Blog No:</b> ' + prop + '<br />';
-					htmlText += '<b>Title: </b>' + blogs[prop].blogTitle + '<br />';
-					htmlText += '<b>Text: </b>' + blogs[prop].blogText + '<br />';
-					htmlText += '<b>Category:</b> ' + blogs[prop].blogCategory + '<br />';
-					htmlText += '<b>Created by:</b> ' + blogs[prop].userID + '<br />';
+		if(userID === ""){
+			document.getElementById("blogsListByUserID").innerHTML = "UserID is empty!!";
+		}else{
+			var url = "public/blogger/blog/users/" + userID;
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", url, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var blogs = JSON.parse(xhr.responseText);
+					var htmlText = '';
+	
+					htmlText += '<b>Total Blogs:</b> ' + blogs.length + '<br />';
 					htmlText += '<hr />'
-					htmlText += '</div>';
-			  	}
-			  	document.getElementById('blogsListByUserID').innerHTML = htmlText;
-			}else if (xhr.readyState == 4 && xhr.status == 404) {
-				document.getElementById("blogsListByUserID").innerHTML = "User Not Found";
-			}else if (xhr.readyState == 4 && xhr.status == 405) {
-				document.getElementById("blogsListByUserID").innerHTML = "Blog Not Fould";
-			}else if (xhr.readyState == 4 ) {
-				document.getElementById("blogsListByUserID").innerHTML = "Internal Server Error";
-			}
-		};
-		xhr.send();
+						
+					for (var prop in blogs) {
+						htmlText += '<b>Blog No:</b> ' + prop + '<br />';
+						htmlText += '<b>Title: </b>' + blogs[prop].blogTitle + '<br />';
+						htmlText += '<b>Text: </b>' + blogs[prop].blogText + '<br />';
+						htmlText += '<b>Category:</b> ' + blogs[prop].blogCategory + '<br />';
+						htmlText += '<b>Created by:</b> ' + blogs[prop].userID + '<br />';
+						htmlText += '<hr />'
+						htmlText += '</div>';
+				  	}
+				  	document.getElementById('blogsListByUserID').innerHTML = htmlText;
+				}else if (xhr.readyState == 4 && xhr.status == 404) {
+					document.getElementById("blogsListByUserID").innerHTML = "User Not Found";
+				}else if (xhr.readyState == 4 && xhr.status == 405) {
+					document.getElementById("blogsListByUserID").innerHTML = "Blog Not Fould";
+				}else if (xhr.readyState == 4 ) {
+					document.getElementById("blogsListByUserID").innerHTML = "Internal Server Error";
+				}
+			};
+			xhr.send();
+		}
 	});
 	document.getElementById("searchBlogByCategoryButton").addEventListener("click", function() {
 		var category = document.getElementById("searchCategory").value;
-		var url = "public/blogger/blog/category/" + category;
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", url, true);
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var blogs = JSON.parse(xhr.responseText);
-				var htmlText = '';
-
-				for (var prop in blogs) {
-					htmlText += '<b>Blog No:</b> ' + prop + '<br />';
-					htmlText += '<b>Title: </b>' + blogs[prop].blogTitle + '<br />';
-					htmlText += '<b>Text: </b>' + blogs[prop].blogText + '<br />';
-					htmlText += '<b>Category:</b> ' + blogs[prop].blogCategory + '<br />';
-					htmlText += '<b>Created by:</b> ' + blogs[prop].userID + '<br />';
+		if(category === ""){
+			document.getElementById("blogsListByCategory").innerHTML = "Category is empty!!";
+		}else{
+			var url = "public/blogger/blog/category/" + category;
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", url, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var blogs = JSON.parse(xhr.responseText);
+					var htmlText = '';
+					
+					htmlText += '<b>Total Blogs:</b> ' + blogs.length + '<br />';
 					htmlText += '<hr />'
-					htmlText += '</div>';
-			  	}
-			  	document.getElementById('blogsListByCategory').innerHTML = htmlText;
-			}else if (xhr.readyState == 4 && xhr.status == 404) {
-				document.getElementById("blogsListByCategory").innerHTML = "User Not Found";
-			}else if (xhr.readyState == 4 && xhr.status == 405) {
-				document.getElementById("blogsListByCategory").innerHTML = "Blog Not Fould";
-			}else if (xhr.readyState == 4 ) {
-				document.getElementById("blogsListByCategory").innerHTML = "Internal Server Error";
-			}
-		};
-		xhr.send();
+						
+					for (var prop in blogs) {
+						htmlText += '<b>Blog No:</b> ' + prop + '<br />';
+						htmlText += '<b>Title: </b>' + blogs[prop].blogTitle + '<br />';
+						htmlText += '<b>Text: </b>' + blogs[prop].blogText + '<br />';
+						htmlText += '<b>Category:</b> ' + blogs[prop].blogCategory + '<br />';
+						htmlText += '<b>Created by:</b> ' + blogs[prop].userID + '<br />';
+						htmlText += '<hr />'
+						htmlText += '</div>';
+				  	}
+				  	document.getElementById('blogsListByCategory').innerHTML = htmlText;
+				}else if (xhr.readyState == 4 && xhr.status == 404) {
+					document.getElementById("blogsListByCategory").innerHTML = "User Not Found";
+				}else if (xhr.readyState == 4 && xhr.status == 405) {
+					document.getElementById("blogsListByCategory").innerHTML = "Blog Not Fould";
+				}else if (xhr.readyState == 4 ) {
+					document.getElementById("blogsListByCategory").innerHTML = "Internal Server Error";
+				}
+			};
+			xhr.send();
+		}
 	});
 	document.getElementById("searchBlogByTitleButton").addEventListener("click", function() {
 		var title = document.getElementById("searchTitle").value;
-		var url = "public/blogger/blog/title/" + title;
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", url, true);
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var blogs = JSON.parse(xhr.responseText);
-				var htmlText = '';
-
-				for (var prop in blogs) {
-					htmlText += '<b>Blog No:</b> ' + prop + '<br />';
-					htmlText += '<b>Title: </b>' + blogs[prop].blogTitle + '<br />';
-					htmlText += '<b>Text: </b>' + blogs[prop].blogText + '<br />';
-					htmlText += '<b>Category:</b> ' + blogs[prop].blogCategory + '<br />';
-					htmlText += '<b>Created by:</b> ' + blogs[prop].userID + '<br />';
+		
+		if(title === ""){
+			document.getElementById("blogsListByTitle").innerHTML = "Title is empty!!";
+		}else{
+			var url = "public/blogger/blog/title/" + title;
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", url, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var blogs = JSON.parse(xhr.responseText);
+					var htmlText = '';
+					htmlText += '<b>Total Blogs:</b> ' + blogs.length + '<br />';
 					htmlText += '<hr />'
-					htmlText += '</div>';
-			  	}
-			  	document.getElementById('blogsListByTitle').innerHTML = htmlText;
-			}else if (xhr.readyState == 4 && xhr.status == 404) {
-				document.getElementById("blogsListByTitle").innerHTML = "User Not Found";
-			}else if (xhr.readyState == 4 && xhr.status == 405) {
-				document.getElementById("blogsListByTitle").innerHTML = "Blog Not Fould";
-			}else if (xhr.readyState == 4 ) {
-				document.getElementById("blogsListByTitle").innerHTML = "Internal Server Error";
-			}
-		};
-		xhr.send();
+					for (var prop in blogs) {
+						htmlText += '<b>Blog No:</b> ' + prop + '<br />';
+						htmlText += '<b>Title: </b>' + blogs[prop].blogTitle + '<br />';
+						htmlText += '<b>Text: </b>' + blogs[prop].blogText + '<br />';
+						htmlText += '<b>Category:</b> ' + blogs[prop].blogCategory + '<br />';
+						htmlText += '<b>Created by:</b> ' + blogs[prop].userID + '<br />';
+						htmlText += '<hr />'
+						htmlText += '</div>';
+				  	}
+				  	document.getElementById('blogsListByTitle').innerHTML = htmlText;
+				}else if (xhr.readyState == 4 && xhr.status == 404) {
+					document.getElementById("blogsListByTitle").innerHTML = "User Not Found";
+				}else if (xhr.readyState == 4 && xhr.status == 405) {
+					document.getElementById("blogsListByTitle").innerHTML = "Blog Not Fould";
+				}else if (xhr.readyState == 4 ) {
+					document.getElementById("blogsListByTitle").innerHTML = "Internal Server Error";
+				}
+			};
+			xhr.send();
+		}
 	});
 	document.getElementById("registerUserButton").addEventListener("click", function() {
 		var userID = document.getElementById("userID").value;
@@ -273,32 +293,44 @@ window.addEventListener("load", function() {
 		var lastName = document.getElementById("lastName").value;
 		var emailID = document.getElementById("emailID").value;
 		
-		var user = {
-				  "userID": userID,
-				  "password": password,
-				  "firstName": firstName,
-				  "lastName": lastName,
-				  "emailID": emailID
+		if(userID === ""){
+			document.getElementById("registerMsg").innerHTML = "UserID is empty!!";
+		} else if(password === ""){
+			document.getElementById("registerMsg").innerHTML = "Password is empty!!";
+		} else if(firstName === ""){
+			document.getElementById("registerMsg").innerHTML = "FirstName is empty!!";
+		}else if(lastName === ""){
+			document.getElementById("registerMsg").innerHTML = "Last Name is empty!!";
+		}else if(emailID === ""){
+			document.getElementById("registerMsg").innerHTML = "Email ID is empty!!";
+		} else{
+			var user = {
+					  "userID": userID,
+					  "password": password,
+					  "firstName": firstName,
+					  "lastName": lastName,
+					  "emailID": emailID
+					}
+	
+			var url = "public/blogger/users/";
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST",url);
+			xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var addedUser = JSON.parse(xhr.responseText);
+					document.getElementById("registerMsg").innerHTML = "User Creation Successful";
+				}else if (xhr.readyState == 4 && xhr.status == 406) {
+					document.getElementById("registerMsg").innerHTML = "User Already Exit";
+				}else if (xhr.readyState == 4 && xhr.status == 405) {
+					document.getElementById("registerMsg").innerHTML = "Invalid User Details,Please check";
+				}else if (xhr.readyState == 4 && xhr.status == 500) {
+					document.getElementById("registerMsg").innerHTML = "Internal Server Error";
 				}
-
-		var url = "public/blogger/users/";
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST",url);
-		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var addedUser = JSON.parse(xhr.responseText);
-				document.getElementById("registerMsg").innerHTML = "User Creation Successful";
-			}else if (xhr.readyState == 4 && xhr.status == 406) {
-				document.getElementById("registerMsg").innerHTML = "User Already Exit";
-			}else if (xhr.readyState == 4 && xhr.status == 405) {
-				document.getElementById("registerMsg").innerHTML = "Invalid User Details,Please check";
-			}else if (xhr.readyState == 4 && xhr.status == 500) {
-				document.getElementById("registerMsg").innerHTML = "Internal Server Error";
-			}
-		};
-		xhr.send(JSON.stringify(user));
+			};
+			xhr.send(JSON.stringify(user));
+		}
 	});
 
 	document.getElementById("updateUserProfileButton").addEventListener("click", function() {
@@ -307,33 +339,43 @@ window.addEventListener("load", function() {
 		var lastName = document.getElementById("updatedLastName").value;
 		var emailID = document.getElementById("updatedEmailID").value;
 
-		if(loginData.lUserID === null) 
-		{
-			document.getElementById("updateUserProfileMsg").innerHTML = "Log In First";
-		}else {
-			var user = {
-					  "userID": loginData.lUserID,
-					  "password": password,
-					  "firstName": firstName,
-					  "lastName": lastName,
-					  "emailID": emailID
-					}
-
-            var url = "public/blogger/users/";
-            var xhr = new XMLHttpRequest();
-            xhr.open("PUT", url);
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-            xhr.setRequestHeader('authorization', loginData.authorization);
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("updateUserProfileMsg").innerHTML = "User Profile Updated ";
-                } else if (xhr.readyState == 4 && xhr.status == 406) {
-                    document.getElementById("updateUserProfileMsg").innerHTML = "Failed !! User Profile Updation";
-                }
-            };
-            xhr.send(JSON.stringify(user));
-        }
+		if(password === ""){
+			document.getElementById("updateUserProfileMsg").innerHTML = "Password is empty!!";
+		} else if(firstName === ""){
+			document.getElementById("updateUserProfileMsg").innerHTML = "First Name is empty!!";
+		}else if(lastName === ""){
+			document.getElementById("updateUserProfileMsg").innerHTML = "Last Name is empty!!";
+		}else if(emailID === ""){
+			document.getElementById("updateUserProfileMsg").innerHTML = "Email ID is empty!!";
+		} else{
+			if(loginData.lUserID === null) 
+			{
+				document.getElementById("updateUserProfileMsg").innerHTML = "Log In First";
+			}else {
+				var user = {
+						  "userID": loginData.lUserID,
+						  "password": password,
+						  "firstName": firstName,
+						  "lastName": lastName,
+						  "emailID": emailID
+						}
+	
+	            var url = "public/blogger/users/";
+	            var xhr = new XMLHttpRequest();
+	            xhr.open("PUT", url);
+	            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	            xhr.setRequestHeader('authorization', loginData.authorization);
+	
+	            xhr.onreadystatechange = function () {
+	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                    document.getElementById("updateUserProfileMsg").innerHTML = "User Profile Updated ";
+	                } else if (xhr.readyState == 4 && xhr.status == 406) {
+	                    document.getElementById("updateUserProfileMsg").innerHTML = "Failed !! User Profile Updation";
+	                }
+	            };
+	            xhr.send(JSON.stringify(user));
+	        }
+		}
 	});
 	document.getElementById("deleteUserProfileButton").addEventListener("click", function() {
 
@@ -350,7 +392,11 @@ window.addEventListener("load", function() {
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
+	        			loginData.lUserID = null;
+	        			loginData.authorization = null;
+	                document.getElementById("logInUserLink").innerHTML = "Log In";
                     document.getElementById("deleteUserProfileMsg").innerHTML = "User Profile Deleted ";
+
                 } else if (xhr.readyState == 4 && xhr.status == 406) {
                     document.getElementById("deleteUserProfileMsg").innerHTML = "Failed !! User Profile Deletion";
                 }
@@ -363,61 +409,76 @@ window.addEventListener("load", function() {
 		var blogTitle = document.getElementById("blogTitle").value;
 		var blogText = document.getElementById("blogText").value;
 		var blogCategory = document.getElementById("blogCategory").value;
-		var blogUserID = document.getElementById("BlogUserId").value;
+		var blogUserID = loginData.lUserID;
 
-		if(loginData.lUserID === blogUserID) {
-            var blog = {
-                "blogID": blogID,
-                "blogTitle": blogTitle,
-                "blogText": blogText,
-                "blogCategory": blogCategory,
-                "userID": blogUserID
-            }
-
-            var url = "public/blogger/blog/";
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url);
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-            xhr.setRequestHeader('authorization', loginData.authorization);
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var addedUser = JSON.parse(xhr.responseText);
-                    document.getElementById("createBlogResults").innerHTML = "Blog Posted: ";
-                } else if (xhr.readyState == 4 && xhr.status == 406) {
-                    document.getElementById("createBlogResults").innerHTML = "Blog Posting Failed";
-                }
-            };
-            xhr.send(JSON.stringify(blog));
-        }else{
-			document.getElementById("createBlogResults").innerHTML = "Log In First";
+		if(blogTitle === ""){
+			document.getElementById("createBlogResults").innerHTML = "Title is empty!!";
+		} else if(blogText === ""){
+			document.getElementById("createBlogResults").innerHTML = "Text is empty!!";	
+		}else if(blogCategory === ""){
+			document.getElementById("createBlogResults").innerHTML = "Category is empty!!";
+		} else{
+			if(loginData.lUserID !== null) {
+	            var blog = {
+	                "blogID": blogID,
+	                "blogTitle": blogTitle,
+	                "blogText": blogText,
+	                "blogCategory": blogCategory,
+	                "userID": blogUserID
+	            }
+	
+	            var url = "public/blogger/blog/";
+	            var xhr = new XMLHttpRequest();
+	            xhr.open("POST", url);
+	            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	            xhr.setRequestHeader('authorization', loginData.authorization);
+	
+	            xhr.onreadystatechange = function () {
+	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                    var addedUser = JSON.parse(xhr.responseText);
+	                    document.getElementById("createBlogResults").innerHTML = "Blog Posted: ";
+	                } else if (xhr.readyState == 4 && xhr.status == 406) {
+	                    document.getElementById("createBlogResults").innerHTML = "Blog Posting Failed";
+	                }
+	            };
+	            xhr.send(JSON.stringify(blog));
+	        }else{
+				document.getElementById("createBlogResults").innerHTML = "Log In First";
+			}
 		}
 	});
 	document.getElementById("logINButton").addEventListener("click", function() {
 		var logInUserID = document.getElementById("logInUserID").value;
 		var logInpassword = document.getElementById("LogInPassword").value;
-		var user = getUser(logInUserID);
-
-		if (user && user.password === logInpassword) {
-			var url = "public/blogger/login/";
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", url);
-			xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					loginData.authorization = xhr.getResponseHeader("authorization");
-					loginData.lUserID = logInUserID;
-
-					document.getElementById("LogINMsg").innerHTML = "Log In Successfull";
-					document.getElementById("logInUserLink").innerHTML = "Log Out";
-				} else if (xhr.readyState == 4 && xhr.status == 406) {
-					document.getElementById("LogINMsg").innerHTML = "Log In Failed for :" + logInUserID + "reason:" + xhr.status;
-				}
-			};
-			xhr.send(JSON.stringify(user));
-		} else {
-			document.getElementById("LogINMsg").innerHTML = "Wrong User ID or Password ! Retry";
+		
+		if(logInUserID === ""){
+			document.getElementById("LogINMsg").innerHTML = "log In User ID is empty!!";	
+		}else if(logInpassword === ""){
+			document.getElementById("LogINMsg").innerHTML = "log In Password is empty!!";
+		} else{
+			var user = getUser(logInUserID);
+	
+			if (user && user.password === logInpassword) {
+				var url = "public/blogger/login/";
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", url);
+				xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						loginData.authorization = xhr.getResponseHeader("authorization");
+						loginData.lUserID = logInUserID;
+	
+						document.getElementById("LogINMsg").innerHTML = "Log In Successfull";
+						document.getElementById("logInUserLink").innerHTML = "Log Out";
+					} else if (xhr.readyState == 4 && xhr.status == 406) {
+						document.getElementById("LogINMsg").innerHTML = "Log In Failed for :" + logInUserID + "reason:" + xhr.status;
+					}
+				};
+				xhr.send(JSON.stringify(user));
+			} else {
+				document.getElementById("LogINMsg").innerHTML = "Wrong User ID or Password ! Retry";
+			}
 		}
 	});
 });
