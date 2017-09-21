@@ -188,7 +188,9 @@ window.addEventListener("load", function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var blogs = JSON.parse(xhr.responseText);
 					var htmlText = '';
-	
+					
+					window.document.getElementById("searchBlogByUserIDForm").style.display = "none";
+					
 					htmlText += '<b>Total Blogs:</b> ' + blogs.length + '<br />';
 					htmlText += '<hr />'
 						
@@ -225,6 +227,8 @@ window.addEventListener("load", function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var blogs = JSON.parse(xhr.responseText);
 					var htmlText = '';
+					
+					window.document.getElementById("searchBlogByCategoryForm").style.display = "none";
 					
 					htmlText += '<b>Total Blogs:</b> ' + blogs.length + '<br />';
 					htmlText += '<hr />'
@@ -263,6 +267,9 @@ window.addEventListener("load", function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var blogs = JSON.parse(xhr.responseText);
 					var htmlText = '';
+					
+					window.document.getElementById("searchBlogByTitleForm").style.display = "none";
+					
 					htmlText += '<b>Total Blogs:</b> ' + blogs.length + '<br />';
 					htmlText += '<hr />'
 					for (var prop in blogs) {
@@ -320,6 +327,7 @@ window.addEventListener("load", function() {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var addedUser = JSON.parse(xhr.responseText);
+					window.document.getElementById("registerUserForm").style.display = "none";
 					document.getElementById("registerMsg").innerHTML = "User Creation Successful";
 				}else if (xhr.readyState == 4 && xhr.status == 406) {
 					document.getElementById("registerMsg").innerHTML = "User Already Exit";
@@ -368,6 +376,7 @@ window.addEventListener("load", function() {
 	
 	            xhr.onreadystatechange = function () {
 	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                		window.document.getElementById("updateUserProfileForm").style.display = "none";
 	                    document.getElementById("updateUserProfileMsg").innerHTML = "User Profile Updated ";
 	                } else if (xhr.readyState == 4 && xhr.status == 406) {
 	                    document.getElementById("updateUserProfileMsg").innerHTML = "Failed !! User Profile Updation";
@@ -394,8 +403,10 @@ window.addEventListener("load", function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
 	        			loginData.lUserID = null;
 	        			loginData.authorization = null;
+	        			window.document.getElementById("deleteUserProfileForm").style.display = "none";
 	                document.getElementById("logInUserLink").innerHTML = "Log In";
                     document.getElementById("deleteUserProfileMsg").innerHTML = "User Profile Deleted ";
+                    document.getElementById("welcomeID").innerHTML = "";
 
                 } else if (xhr.readyState == 4 && xhr.status == 406) {
                     document.getElementById("deleteUserProfileMsg").innerHTML = "Failed !! User Profile Deletion";
@@ -436,6 +447,7 @@ window.addEventListener("load", function() {
 	            xhr.onreadystatechange = function () {
 	                if (xhr.readyState == 4 && xhr.status == 200) {
 	                    var addedUser = JSON.parse(xhr.responseText);
+	                    window.document.getElementById("createBlogForm").style.display = "none";
 	                    document.getElementById("createBlogResults").innerHTML = "Blog Posted: ";
 	                } else if (xhr.readyState == 4 && xhr.status == 406) {
 	                    document.getElementById("createBlogResults").innerHTML = "Blog Posting Failed";
@@ -469,8 +481,10 @@ window.addEventListener("load", function() {
 						loginData.authorization = xhr.getResponseHeader("authorization");
 						loginData.lUserID = logInUserID;
 	
-						document.getElementById("LogINMsg").innerHTML = "Log In Successfull";
+						document.getElementById("welcomeID").innerHTML = "Welcome	 "+logInUserID;
 						document.getElementById("logInUserLink").innerHTML = "Log Out";
+						window.document.getElementById("logInForm").style.display = "none";
+						
 					} else if (xhr.readyState == 4 && xhr.status == 406) {
 						document.getElementById("LogINMsg").innerHTML = "Log In Failed for :" + logInUserID + "reason:" + xhr.status;
 					}
