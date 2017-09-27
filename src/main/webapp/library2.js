@@ -332,7 +332,7 @@ window.addEventListener("load", function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var addedUser = JSON.parse(xhr.responseText);
 					window.document.getElementById("registerUserForm").style.display = "none";
-					document.getElementById("registerMsg").innerHTML = "User Creation Successful";
+					document.getElementById("registerMsg").innerHTML = "User Creation Successful! well done";
 				}else if (xhr.readyState == 4 && xhr.status == 406) {
 					document.getElementById("registerMsg").innerHTML = "User Already Exit";
 				}else if (xhr.readyState == 4 && xhr.status == 405) {
